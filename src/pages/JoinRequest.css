@@ -1,0 +1,134 @@
+/* Page background */
+.joinreq-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #121212, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 16px;
+}
+
+/* Card */
+.joinreq-card {
+  width: 100%;
+  max-width: 460px;
+  background: linear-gradient(180deg, #0e0e0e, #050505);
+  border-radius: 18px;
+  padding: 36px 32px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 20px 60px rgba(0,0,0,0.75);
+  animation: joinreqFade 0.6s ease;
+  border: 1px solid rgb(133, 0, 0);
+}
+
+/* Title */
+.joinreq-title {
+  color: #fff;
+  font-size: 1.7rem;
+  text-align: center;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+/* Subtitle */
+.joinreq-subtitle {
+  color: #9a9a9a;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+/* Form */
+.joinreq-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Field */
+.joinreq-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.joinreq-field label {
+  font-size: 0.85rem;
+  color: #bcbcbc;
+}
+
+/* Inputs */
+.joinreq-field input,
+.joinreq-field select {
+  background: #0b0b0b ;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 11px 14px;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.joinreq-field input::placeholder {
+  color: #777;
+}
+
+/* Focus */
+.joinreq-field input:focus,
+.joinreq-field select:focus {
+  border-color: rgb(183, 0, 0);
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.434);
+}
+
+/* Button */
+.joinreq-btn {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  background: rgb(183, 0, 0);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.joinreq-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(237, 58, 58, 0.45);
+}
+
+.joinreq-btn:disabled {
+  background: #333;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Message */
+.joinreq-message {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #9ae6b4;
+}
+
+/* Animation */
+@keyframes joinreqFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .joinreq-card {
+    padding: 28px 22px;
+  }
+}
