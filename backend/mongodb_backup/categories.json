@@ -1,0 +1,450 @@
+[
+  {
+    "_id": "693690f699c3bd4559990ee2",
+    "name": "Gadgets",
+    "createdAt": "2025-12-08T08:48:54.378Z",
+    "updatedAt": "2025-12-15T08:55:42.675Z",
+    "__v": 0,
+    "slug": "gadgets"
+  },
+  {
+    "_id": "693690fe99c3bd4559990ee6",
+    "name": "Mehandi Artist",
+    "createdAt": "2025-12-08T08:49:02.891Z",
+    "updatedAt": "2025-12-15T08:52:17.364Z",
+    "__v": 0,
+    "slug": "mehandi-artist"
+  },
+  {
+    "_id": "6936910399c3bd4559990ee9",
+    "name": "Vegetarian - Restaurant",
+    "createdAt": "2025-12-08T08:49:07.350Z",
+    "updatedAt": "2025-12-15T08:56:38.427Z",
+    "__v": 0,
+    "slug": "vegetarian-restaurant"
+  },
+  {
+    "_id": "693fb0228da6390f7b14a717",
+    "name": "Fitness",
+    "slug": "fitness",
+    "createdAt": "2025-12-15T06:52:18.996Z",
+    "updatedAt": "2025-12-15T06:52:18.996Z",
+    "__v": 0
+  },
+  {
+    "_id": "693fb1588da6390f7b14a73a",
+    "name": "Construction",
+    "slug": "construction",
+    "createdAt": "2025-12-15T06:57:28.519Z",
+    "updatedAt": "2025-12-15T08:57:49.555Z",
+    "__v": 0
+  },
+  {
+    "_id": "693fb3578da6390f7b14a756",
+    "name": "Soft Drink",
+    "slug": "soft-drink",
+    "createdAt": "2025-12-15T07:05:59.171Z",
+    "updatedAt": "2025-12-15T08:57:54.938Z",
+    "__v": 0
+  },
+  {
+    "_id": "693fb8a08da6390f7b14a88c",
+    "name": "Textiles and Apparel",
+    "slug": "textiles-and-apparel",
+    "createdAt": "2025-12-15T07:28:32.802Z",
+    "updatedAt": "2025-12-15T07:28:32.802Z",
+    "__v": 0
+  },
+  {
+    "_id": "693fbd128da6390f7b14a8b9",
+    "name": "Architect",
+    "slug": "architect",
+    "createdAt": "2025-12-15T07:47:30.090Z",
+    "updatedAt": "2025-12-15T08:57:07.678Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dc36fcb11ffb53ddca52",
+    "name": "Chits & Finance",
+    "slug": "chits-finance",
+    "createdAt": "2025-12-22T05:50:46.976Z",
+    "updatedAt": "2025-12-22T05:50:46.976Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dc48fcb11ffb53ddca57",
+    "name": "Tiles",
+    "slug": "tiles",
+    "createdAt": "2025-12-22T05:51:04.880Z",
+    "updatedAt": "2025-12-22T05:51:04.880Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dc58fcb11ffb53ddca5c",
+    "name": "Play School",
+    "slug": "play-school",
+    "createdAt": "2025-12-22T05:51:20.457Z",
+    "updatedAt": "2025-12-22T05:51:20.457Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dc76fcb11ffb53ddca61",
+    "name": "Loan",
+    "slug": "loan",
+    "createdAt": "2025-12-22T05:51:50.570Z",
+    "updatedAt": "2025-12-22T05:51:50.570Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dc94fcb11ffb53ddca66",
+    "name": "Ayurveda Clinic",
+    "slug": "ayurveda-clinic",
+    "createdAt": "2025-12-22T05:52:20.389Z",
+    "updatedAt": "2025-12-22T05:52:20.389Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dcabfcb11ffb53ddca6b",
+    "name": "Yoga Center",
+    "slug": "yoga-center",
+    "createdAt": "2025-12-22T05:52:43.494Z",
+    "updatedAt": "2025-12-22T05:52:43.494Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dcb6fcb11ffb53ddca70",
+    "name": "Interior Design",
+    "slug": "interior-design",
+    "createdAt": "2025-12-22T05:52:54.671Z",
+    "updatedAt": "2025-12-22T05:52:54.671Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dcd7fcb11ffb53ddca75",
+    "name": "Photography & Videography",
+    "slug": "photography-videography",
+    "createdAt": "2025-12-22T05:53:27.954Z",
+    "updatedAt": "2025-12-22T05:53:27.954Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dcecfcb11ffb53ddca7a",
+    "name": "Bakery",
+    "slug": "bakery",
+    "createdAt": "2025-12-22T05:53:48.168Z",
+    "updatedAt": "2025-12-22T05:53:48.168Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dcfcfcb11ffb53ddca7f",
+    "name": "Groceries",
+    "slug": "groceries",
+    "createdAt": "2025-12-22T05:54:04.715Z",
+    "updatedAt": "2025-12-22T05:54:04.715Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dd0afcb11ffb53ddca84",
+    "name": "Solar Power",
+    "slug": "solar-power",
+    "createdAt": "2025-12-22T05:54:18.982Z",
+    "updatedAt": "2025-12-22T05:54:18.982Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dd42fcb11ffb53ddca89",
+    "name": "Software Developers",
+    "slug": "software-developers",
+    "createdAt": "2025-12-22T05:55:14.574Z",
+    "updatedAt": "2025-12-22T05:55:14.574Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dd5bfcb11ffb53ddca8e",
+    "name": "Air Conditioner - Commercials",
+    "slug": "air-conditioner-commercials",
+    "createdAt": "2025-12-22T05:55:39.050Z",
+    "updatedAt": "2025-12-22T05:55:39.050Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dd91fcb11ffb53ddca93",
+    "name": "CNC Metals",
+    "slug": "cnc-metals",
+    "createdAt": "2025-12-22T05:56:33.072Z",
+    "updatedAt": "2025-12-22T05:56:33.072Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dda2fcb11ffb53ddca98",
+    "name": "Car Decors",
+    "slug": "car-decors",
+    "createdAt": "2025-12-22T05:56:50.814Z",
+    "updatedAt": "2025-12-22T05:56:50.814Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948ddaefcb11ffb53ddca9d",
+    "name": "Insurance",
+    "slug": "insurance",
+    "createdAt": "2025-12-22T05:57:02.395Z",
+    "updatedAt": "2025-12-22T05:57:02.395Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948ddd2fcb11ffb53ddcaa2",
+    "name": "Organic Cosmetics",
+    "slug": "organic-cosmetics",
+    "createdAt": "2025-12-22T05:57:38.284Z",
+    "updatedAt": "2025-12-22T05:57:38.284Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948dde6fcb11ffb53ddcaa7",
+    "name": "Computer Sales & Services",
+    "slug": "computer-sales-services",
+    "createdAt": "2025-12-22T05:57:58.782Z",
+    "updatedAt": "2025-12-22T05:57:58.782Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948ddf3fcb11ffb53ddcaac",
+    "name": "Jewellery",
+    "slug": "jewellery",
+    "createdAt": "2025-12-22T05:58:11.671Z",
+    "updatedAt": "2025-12-22T05:58:11.671Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948de02fcb11ffb53ddcab1",
+    "name": "Home Decors",
+    "slug": "home-decors",
+    "createdAt": "2025-12-22T05:58:26.539Z",
+    "updatedAt": "2025-12-22T05:58:26.539Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948df2dfcb11ffb53ddcab6",
+    "name": "Digital Marketing",
+    "slug": "digital-marketing",
+    "createdAt": "2025-12-22T06:03:25.153Z",
+    "updatedAt": "2025-12-22T06:03:25.153Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948df41fcb11ffb53ddcabb",
+    "name": "Herbal Foods",
+    "slug": "herbal-foods",
+    "createdAt": "2025-12-22T06:03:45.520Z",
+    "updatedAt": "2025-12-22T06:03:45.520Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948df4efcb11ffb53ddcac0",
+    "name": "Manpower & Labour Contractor",
+    "slug": "manpower-labour-contractor",
+    "createdAt": "2025-12-22T06:03:58.705Z",
+    "updatedAt": "2025-12-22T06:03:58.705Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948df5afcb11ffb53ddcac5",
+    "name": "Commercial Interiors",
+    "slug": "commercial-interiors",
+    "createdAt": "2025-12-22T06:04:10.404Z",
+    "updatedAt": "2025-12-22T06:04:10.404Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e5bdfcb11ffb53ddcae4",
+    "name": "Crypto Currency Investment",
+    "slug": "crypto-currency-investment",
+    "createdAt": "2025-12-22T06:31:25.258Z",
+    "updatedAt": "2025-12-22T06:32:01.497Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e62ffcb11ffb53ddcaef",
+    "name": "Inner Wear",
+    "slug": "inner-wear",
+    "createdAt": "2025-12-22T06:33:19.107Z",
+    "updatedAt": "2025-12-22T06:33:19.107Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e655fcb11ffb53ddcaf4",
+    "name": "Shirting & Suiting",
+    "slug": "shirting-suiting",
+    "createdAt": "2025-12-22T06:33:57.029Z",
+    "updatedAt": "2025-12-22T06:33:57.029Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e66afcb11ffb53ddcaf9",
+    "name": "Dentist",
+    "slug": "dentist",
+    "createdAt": "2025-12-22T06:34:18.884Z",
+    "updatedAt": "2025-12-22T06:34:18.884Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e674fcb11ffb53ddcafe",
+    "name": "Dermatologist",
+    "slug": "dermatologist",
+    "createdAt": "2025-12-22T06:34:28.188Z",
+    "updatedAt": "2025-12-22T06:34:28.188Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e6c6fcb11ffb53ddcb05",
+    "name": "Classical Dance",
+    "slug": "classical-dance",
+    "createdAt": "2025-12-22T06:35:50.326Z",
+    "updatedAt": "2025-12-22T06:35:50.326Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e6f2fcb11ffb53ddcb0a",
+    "name": "Water Proofing",
+    "slug": "water-proofing",
+    "createdAt": "2025-12-22T06:36:34.339Z",
+    "updatedAt": "2025-12-22T06:36:34.339Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e6fffcb11ffb53ddcb0f",
+    "name": "Water Purifier",
+    "slug": "water-purifier",
+    "createdAt": "2025-12-22T06:36:47.729Z",
+    "updatedAt": "2025-12-22T06:36:47.729Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e710fcb11ffb53ddcb14",
+    "name": "Wood Materials",
+    "slug": "wood-materials",
+    "createdAt": "2025-12-22T06:37:04.560Z",
+    "updatedAt": "2025-12-22T06:37:04.560Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e7abfcb11ffb53ddcb19",
+    "name": "Pre Primary & Nursey School",
+    "slug": "pre-primary-nursey-school",
+    "createdAt": "2025-12-22T06:39:39.923Z",
+    "updatedAt": "2025-12-22T06:39:39.923Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e7d9fcb11ffb53ddcb1e",
+    "name": "Silk Sarees",
+    "slug": "silk-sarees",
+    "createdAt": "2025-12-22T06:40:25.646Z",
+    "updatedAt": "2025-12-22T06:40:25.646Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e803fcb11ffb53ddcb23",
+    "name": "Bridal Makeover",
+    "slug": "bridal-makeover",
+    "createdAt": "2025-12-22T06:41:07.753Z",
+    "updatedAt": "2025-12-22T06:41:07.753Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e81bfcb11ffb53ddcb28",
+    "name": "CCTV & Security Systems",
+    "slug": "cctv-security-systems",
+    "createdAt": "2025-12-22T06:41:31.884Z",
+    "updatedAt": "2025-12-22T06:41:31.884Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e82afcb11ffb53ddcb2d",
+    "name": "Stainless Steel",
+    "slug": "stainless-steel",
+    "createdAt": "2025-12-22T06:41:46.379Z",
+    "updatedAt": "2025-12-22T06:41:46.379Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e838fcb11ffb53ddcb32",
+    "name": "Pest Control",
+    "slug": "pest-control",
+    "createdAt": "2025-12-22T06:42:00.970Z",
+    "updatedAt": "2025-12-22T06:42:00.970Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e844fcb11ffb53ddcb37",
+    "name": "Auditor",
+    "slug": "auditor",
+    "createdAt": "2025-12-22T06:42:12.733Z",
+    "updatedAt": "2025-12-22T06:42:12.733Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e851fcb11ffb53ddcb3c",
+    "name": "Overseas Education",
+    "slug": "overseas-education",
+    "createdAt": "2025-12-22T06:42:25.995Z",
+    "updatedAt": "2025-12-22T06:42:25.995Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e865fcb11ffb53ddcb41",
+    "name": "Info Tech",
+    "slug": "info-tech",
+    "createdAt": "2025-12-22T06:42:45.210Z",
+    "updatedAt": "2025-12-22T06:42:45.210Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e87dfcb11ffb53ddcb46",
+    "name": "Fitness Coah",
+    "slug": "fitness-coah",
+    "createdAt": "2025-12-22T06:43:09.759Z",
+    "updatedAt": "2025-12-22T06:43:09.759Z",
+    "__v": 0
+  },
+  {
+    "_id": "6948e891fcb11ffb53ddcb4b",
+    "name": "Super Market",
+    "slug": "super-market",
+    "createdAt": "2025-12-22T06:43:29.955Z",
+    "updatedAt": "2025-12-22T06:43:29.955Z",
+    "__v": 0
+  },
+  {
+    "_id": "69afc17fb0d3de8c715f9768",
+    "name": "Boutique",
+    "slug": "boutique",
+    "createdAt": "2026-03-10T07:00:15.960Z",
+    "updatedAt": "2026-03-14T07:08:11.113Z",
+    "__v": 0
+  },
+  {
+    "_id": "69bd2e66cf9f6cb14724984b",
+    "name": "Event Management",
+    "slug": "event-management",
+    "createdAt": "2026-03-20T11:24:22.880Z",
+    "updatedAt": "2026-03-20T11:24:22.880Z",
+    "__v": 0
+  },
+  {
+    "_id": "69d5ce942262621bed82babd",
+    "name": "Rea",
+    "slug": "rea",
+    "createdAt": "2026-04-08T03:42:12.714Z",
+    "updatedAt": "2026-04-08T03:42:12.714Z",
+    "__v": 0
+  },
+  {
+    "_id": "69d5cea12262621bed82bac2",
+    "name": "Real Estate",
+    "slug": "real-estate",
+    "createdAt": "2026-04-08T03:42:25.819Z",
+    "updatedAt": "2026-04-08T03:42:25.819Z",
+    "__v": 0
+  }
+]

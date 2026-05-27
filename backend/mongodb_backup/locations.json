@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "6936783f99c3bd4559990ddd",
+    "name": "Katpadi",
+    "createdAt": "2025-12-08T07:03:27.223Z",
+    "updatedAt": "2025-12-10T05:17:18.516Z",
+    "__v": 0,
+    "slug": "katpadi"
+  },
+  {
+    "_id": "69369c7899a6d5ed95f88a22",
+    "name": "Vellore",
+    "createdAt": "2025-12-08T09:38:01.018Z",
+    "updatedAt": "2025-12-10T05:17:18.649Z",
+    "__v": 0,
+    "slug": "vellore"
+  }
+]
