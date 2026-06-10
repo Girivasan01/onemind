@@ -1,22 +1,30 @@
-
+/* ===== ABOUT PAGE ===== */
 .about-page {
   margin: auto;
-  padding: 60px 20px 80px;
+  padding: 0;
   color: #e5e7eb;
   background-color: black;
   width: 100%;
+  min-height: 100vh;
 }
 
-/* HERO */
+/* HERO / ABOUT US HEADING */
 .about-hero {
   text-align: center;
-  margin-bottom: 60px;
+  padding: 60px 20px 40px;
 }
 
 .about-hero h1 {
   font-size: 44px;
   font-weight: 700;
   color: #ffffff;
+  letter-spacing: 3px;
+}
+
+.about-hero-gif {
+  height: 80px;
+  width: 300px;
+  margin: 20px 0;
 }
 
 .about-tagline {
@@ -25,89 +33,176 @@
   color: #9ca3af;
 }
 
-/* CONTENT */
-.about-content {
+/* SHARED SECTION STYLES */
+.about-section {
   max-width: 820px;
-  margin: auto;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.about-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #ee0101;
+  letter-spacing: 1px;
+}
+
+/* FOUNDER'S MESSAGE */
+.founder-content p {
   font-size: 17px;
   line-height: 1.9;
   color: #d1d5db;
+  margin-bottom: 18px;
 }
 
-.about-content p {
-  margin-bottom: 22px;
+.founder-sign-off {
+  margin-top: 28px;
+  font-style: italic;
+  color: #9ca3af;
 }
 
-/* VALUES */
-.about-values {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 26px;
-  margin-top: 70px;
+/* WHAT IS OMM */
+.whatisomm-content p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: #d1d5db;
+  margin-bottom: 18px;
 }
 
-.value-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 30px 24px;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* CONTACT US FORM */
+.contact-section {
+  padding-bottom: 80px;
 }
 
-.value-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
-}
-
-/* ICONS */
-.value-icon {
-  font-size: 38px;
-  margin-bottom: 14px;
-  color: #dd1d00;
-}
-
-.value-card h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-.value-card p {
-  font-size: 15px;
-  line-height: 1.7;
-  color: #cbd5f5;
-}
-
-/* IMPACT STRIP */
-.about-impact {
-  margin-top: 80px;
+.contact-form {
   display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.impact-item {
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #d1d5db;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contact-field input {
+  padding: 14px 18px;
+  font-size: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-field input:focus {
+  border-color: #ee0101;
+  box-shadow: 0 0 0 3px rgba(238, 1, 1, 0.15);
+}
+
+.contact-field input::placeholder {
+  color: #6b7280;
+}
+
+/* WHATSAPP BUTTON */
+.whatsapp-btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+  padding: 14px 24px;
+  background: #25D366;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
   font-size: 16px;
-  color: #d1d5db;
-  padding: 12px 18px;
-  border-radius: 30px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.2s;
+  margin-top: 10px;
 }
 
-.impact-item:hover{
-    transform: translateY(-6px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
-  transition-duration: 0.5s;
+.whatsapp-btn:hover {
+  background: #1da851;
+  transform: translateY(-2px);
 }
 
-.impact-item svg {
+.whatsapp-icon {
   font-size: 22px;
-  color: #22c55e;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .about-hero h1 {
+    font-size: 32px;
+  }
+
+  .about-hero-gif {
+    height: 60px;
+    width: 220px;
+  }
+
+  .about-tagline {
+    font-size: 15px;
+  }
+
+  .about-section h2 {
+    font-size: 22px;
+  }
+
+  .founder-content p,
+  .whatisomm-content p {
+    font-size: 15px;
+  }
+
+  .contact-field input {
+    font-size: 15px;
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero {
+    padding: 40px 15px 30px;
+  }
+
+  .about-hero h1 {
+    font-size: 26px;
+  }
+
+  .about-hero-gif {
+    height: 45px;
+    width: 160px;
+  }
+
+  .about-section {
+    padding: 30px 15px;
+  }
+
+  .about-section h2 {
+    font-size: 20px;
+  }
+
+  .contact-field input {
+    font-size: 14px;
+    padding: 11px 12px;
+  }
+
+  .whatsapp-btn {
+    font-size: 15px;
+    padding: 12px 20px;
+  }
 }

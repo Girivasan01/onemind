@@ -2,10 +2,33 @@
   max-width: 900px;
   margin: 40px auto;
   padding: 25px;
-  background: #ffffff;
+  background: #0D0D0F;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 14px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
   animation: fadeIn 0.4s ease-in-out;
+  position: relative;
+}
+
+/* View Counter Badge */
+.view-counter {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ccc;
+  z-index: 5;
+}
+
+.view-icon {
+  font-size: 16px;
+  color: #ee0101;
 }
 
 .shop-header {
@@ -20,13 +43,13 @@
   height: 280px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.16);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
   flex-shrink: 0;
 }
 
 .shop-info { flex: 1; }
 
-.shop-short-details p { margin: 6px 5px 20px 2px; font-size: 15px; color: #222}
+.shop-short-details p { margin: 6px 5px 20px 2px; font-size: 15px; color: #ccc; }
 
 @media (max-width: 860px) {
   .shop-header { flex-direction: column; align-items: center; }
@@ -38,15 +61,16 @@
 .image-slider-section {
   margin: 30px 0;
   padding: 20px;
-  background: #f9f9f9;
+  background: #111113;
   border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .image-slider-section h3 {
   margin: 0 0 15px 0;
   font-size: 18px;
   font-weight: 600;
-  color: #333;
+  color: #fff;
 }
 
 .image-slider-container {
@@ -55,7 +79,7 @@
   justify-content: center;
   gap: 12px;
   margin-bottom: 12px;
-  background: white;
+  background: #161618;
   border-radius: 8px;
   padding: 8px;
 }
@@ -117,7 +141,7 @@
 
 .indicator-text {
   font-size: 13px;
-  color: #666;
+  color: #888;
   font-weight: 500;
 }
 
@@ -138,7 +162,7 @@
 .slider-top {
   font-size: 14px;
   font-weight: 600;
-  color: #333;
+  color: #ccc;
   text-align: center;
 }
 
@@ -158,7 +182,7 @@
   justify-content: center;
   overflow: hidden;
   border-radius: 8px;
-  background: #fff;
+  background: #161618;
 }
 
 .slider-image-large {
@@ -181,8 +205,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #888;
-  background: #fff;
+  color: #666;
+  background: #161618;
   border-radius: 8px;
 }
 
@@ -202,13 +226,14 @@
   display: inline-block;
   margin-right: 10px;
   padding: 5px 14px;
-  background: #eef2ff;
-  color: #000000;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 10px;
   margin-top: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 .tags,.shop-short-details{
   margin-left: 15px;
@@ -219,7 +244,6 @@
 
 .owner-details-section{
   height: auto;
-
 }
 
 .details-section h2, .shop_name {
@@ -227,6 +251,7 @@
   margin-bottom: 15px;
   border-left: 4px solid #ee0101;
   padding-left: 10px;
+  color: #fff;
 }
 
 .owner-card {
@@ -234,9 +259,9 @@
   align-items: center;
   gap: 20px;
   padding: 15px;
- background-color: #ee0101;
+  background-color: #ee0101;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   color: white;
 }
 
@@ -275,16 +300,17 @@
   height: 90px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #ddd;
+  border: 3px solid rgba(255, 255, 255, 0.2);
 }
 
 .details-section p {
   margin: 8px 0;
   font-size: 16px;
+  color: #ccc;
 }
 
 a {
-  color: #2563eb;
+  color: #e8612d;
   font-weight: 600;
 }
 
@@ -294,7 +320,7 @@ a {
   margin-top: 40px;
   font-size: 20px;
   font-weight: 600;
-  color: #444;
+  color: #999;
 }
 
 @keyframes fadeIn {
@@ -303,7 +329,6 @@ a {
 }
 
 .enquiry-btn {
- 
   width: 30%;
   padding: 10px;
   background: #ee0101;
@@ -317,5 +342,24 @@ a {
 
 .enquiry-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.shop-description-section,
+.shop-article-section {
+  margin-top: 20px;
+}
+
+.shop-description-section h3,
+.shop-article-section h3 {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.business-description,
+.business-article {
+  color: #9CA3AF;
+  font-size: 14px;
+  line-height: 1.6;
 }

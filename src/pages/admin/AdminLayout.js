@@ -25,9 +25,11 @@ const AdminLayout = () => {
         <nav className="sidebar-nav">
           <Link to="/admin/add-category">Add Category</Link>
           <Link to="/admin/add-location">Add Location</Link>
-          <Link to="/admin/add-customer">Add Customer</Link>
+          <Link to="/admin/customers">Manage Customers</Link>
           <Link to="/admin/view-join-requests">View Join Requests</Link>
           <Link to="/admin/AdminEnquiries">Enquiry</Link>
+          <Link to="/admin/articles">Manage Articles</Link>
+          <Link to="/admin/gallery">Manage Gallery</Link>
         </nav>
 
         <div style={{ marginTop: 20 }}>

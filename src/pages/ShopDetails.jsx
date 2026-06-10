@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 import { BASE_URL } from "../api";
 
 import "./ShopDetails.css";
@@ -8,12 +10,14 @@ const SERVER_URL = BASE_URL.replace("/api", "");
 const UPLOADS_URL = `${SERVER_URL}/uploads`;
 
 const ShopDetails = () => {
-  const { slug } = useParams();
+  const { slug, locationSlug, categorySlug, businessSlug } = useParams();
+  const effectiveSlug = businessSlug || slug;
   const [shop, setShop] = useState(null);
   const [photos1, setPhotos1] = useState([]);
   const [photos2, setPhotos2] = useState([]);
   const [photos3, setPhotos3] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [viewCount, setViewCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,11 +27,11 @@ const ShopDetails = () => {
         // Determine if slug param is an ObjectId
         const isObjectId = (s) => /^[0-9a-fA-F]{24}$/.test(s);
         let customer = null;
-        if (isObjectId(slug)) {
-          const res = await fetch(`${BASE_URL}/customers/${slug}`);
+        if (isObjectId(effectiveSlug)) {
+          const res = await fetch(`${BASE_URL}/customers/${effectiveSlug}`);
           if (res.ok) customer = await res.json();
         } else {
-          const res = await fetch(`${BASE_URL}/customers/slug/${encodeURIComponent(slug)}`);
+          const res = await fetch(`${BASE_URL}/customers/slug/${encodeURIComponent(effectiveSlug)}`);
           if (res.ok) customer = await res.json();
         }
 
@@ -36,6 +40,14 @@ const ShopDetails = () => {
           setPhotos1([]);
           setPhotos2([]);
           setPhotos3([]);
+          return;
+        }
+
+        // Redirect legacy URLs (/business/:slug, /shop/:slug, /search/category/...) to the new SEO format
+        const locSlug = customer.location?.slug || 'unknown';
+        const catSlug = customer.category?.slug || 'uncategorized';
+        if (!locationSlug && customer.slug) {
+          navigate(`/${locSlug}/${catSlug}/${customer.slug}`, { replace: true });
           return;
         }
 
@@ -58,8 +70,17 @@ const ShopDetails = () => {
       }
     }
 
-    if (slug) fetchShop();
-  }, [slug]);
+    if (effectiveSlug) fetchShop();
+  }, [effectiveSlug, locationSlug, businessSlug, navigate]);
+
+  // Record a view when shop data is loaded
+  useEffect(() => {
+    if (!shop || !shop.slug) return;
+    fetch(`${BASE_URL}/customers/slug/${shop.slug}/view`, { method: 'POST' })
+      .then(r => r.json())
+      .then(data => setViewCount(data.viewCount || 0))
+      .catch(() => {});
+  }, [shop]);
 
   if (loading) return <p className="loading">Loading...</p>;
   if (!shop) return <p className="not-found">Shop not found.</p>;
@@ -67,9 +88,25 @@ const ShopDetails = () => {
   return (
     <div className="shop-details-container">
 
+      <Helmet>
+        <title>{shop.shopName} | OneMind Market</title>
+        <meta name="description" content={shop.shopDescription ? shop.shopDescription.substring(0, 160) : `${shop.shopName} - Find details, photos, and contact info on OneMind Market.`} />
+        <link rel="canonical" href={`https://onemindmarket.in/${shop.location?.slug || 'unknown'}/${shop.category?.slug || 'uncategorized'}/${shop.slug}`} />
+        <meta property="og:title" content={`${shop.shopName} | OneMind Market`} />
+        <meta property="og:description" content={shop.shopDescription ? shop.shopDescription.substring(0, 200) : `${shop.shopName} in ${shop.location?.name || ''}`} />
+        <meta property="og:url" content={`https://onemindmarket.in/${shop.location?.slug || 'unknown'}/${shop.category?.slug || 'uncategorized'}/${shop.slug}`} />
+        {shop.shopPhoto && <meta property="og:image" content={`${SERVER_URL}/uploads/${shop.shopPhoto}`} />}
+        <meta property="og:type" content="business.business" />
+      </Helmet>
+
+      <div className="view-counter">
+        <FaEye className="view-icon" />
+        <span>{viewCount}</span>
+      </div>
+
       <div className="shop-header">
         
-      <img src={`${UPLOADS_URL}/${shop.shopPhoto}`} alt="business_logo" className="shop-main-image" />
+      <img src={`${UPLOADS_URL}/${shop.shopPhoto}`} alt={`${shop.shopName} - ${shop.category?.name || 'Business'} in ${shop.location?.name || ''}`} className="shop-main-image" />
 
         <div className="shop-info">
 
@@ -117,7 +154,7 @@ const ShopDetails = () => {
         </div>
       )}
 
-      <ThreeSliders photos1={photos1} photos2={photos2} photos3={photos3} />
+      <ThreeSliders photos1={photos1} photos2={photos2} photos3={photos3} shopName={shop.shopName} />
 
       <div className="details-section">
         <h2>Owner Details</h2>
@@ -130,7 +167,7 @@ const ShopDetails = () => {
 
 export default ShopDetails;
 
-function Slider({ photos, label }) {
+function Slider({ photos, label, shopName }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -157,7 +194,7 @@ function Slider({ photos, label }) {
       <div className="slider-single">
         <img
           src={`${UPLOADS_URL}/${photos[currentIndex]}`}
-          alt={`shop-photo-${currentIndex}`}
+          alt={`${shopName || 'Business'} - ${label} photo ${currentIndex + 1}`}
           className="slider-image-cover"
         />
       </div>
@@ -165,14 +202,14 @@ function Slider({ photos, label }) {
   );
 }
 
-function ThreeSliders({ photos1, photos2, photos3 }) {
+function ThreeSliders({ photos1, photos2, photos3, shopName }) {
   return (
     <div className="image-slider-section">
       <h3>Business Gallery</h3>
       <div className="three-sliders">
-        <Slider photos={photos1} label="Gallery A" />
-        <Slider photos={photos2} label="Gallery B" />
-        <Slider photos={photos3} label="Gallery C" />
+        <Slider photos={photos1} label="Gallery A" shopName={shopName} />
+        <Slider photos={photos2} label="Gallery B" shopName={shopName} />
+        <Slider photos={photos3} label="Gallery C" shopName={shopName} />
       </div>
     </div>
   );
@@ -211,7 +248,7 @@ function OwnerDetailsToggle({ shop }) {
         {/* <h2>Owner Details</h2> */}
         <div className="owner-card" ref={contentRef}>
           {shop.ownerPhoto && (
-            <img src={`${UPLOADS_URL}/${shop.ownerPhoto}`} alt="owner" className="owner-image" />
+            <img src={`${UPLOADS_URL}/${shop.ownerPhoto}`} alt={`${shop.ownerName || 'Owner'} - ${shop.shopName}`} className="owner-image" />
           )}
           <div>
             <p><strong>Owner Name:</strong> {shop.ownerName}</p>

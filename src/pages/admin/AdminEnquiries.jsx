@@ -26,7 +26,7 @@ const AdminEnquiries = () => {
 
     try {
       setClearing(true);
-      const res = await fetch(`${BASE_URL}/enquiries`, {
+      const res = await fetch(`${BASE_URL}/delete-enquiry`, {
         method: "DELETE",
       });
 

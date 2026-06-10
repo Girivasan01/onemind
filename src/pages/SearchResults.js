@@ -1,5 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { FiSearch } from "react-icons/fi";
 import { BASE_URL } from "../api";
 import "./SearchResults.css";
 
@@ -7,308 +9,248 @@ const SERVER_URL = BASE_URL.replace("/api", "");
 const UPLOADS_URL = `${SERVER_URL}/uploads`;
 
 const SearchResults = () => {
-
-  
-
   const [params] = useSearchParams();
-  const [results, setResults] = useState([]);
-  const [photosMap, setPhotosMap] = useState({});
-  const [loading, setLoading] = useState(false);
-    const [shop, setShop] = useState(null);
   const navigate = useNavigate();
+
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [total, setTotal] = useState(0);
 
   const q = params.get("q") || "";
   const categoryParam = params.get("category") || "";
   const locationParam = params.get("location") || "";
 
+  // Build display text for the search bar
+  const searchDisplayText = q || categoryParam || "Search";
+
+  // Rewrite ObjectID params to slugs using results data
   useEffect(() => {
-    async function updateUrlIfNeeded() {
-      let needsUpdate = false;
-      const newSearchParams = new URLSearchParams();
-      if (q) newSearchParams.set("q", q);
+    if (loading || results.length === 0) return;
 
-      // Check category
-      if (categoryParam && /^[0-9a-fA-F]{24}$/.test(categoryParam)) {
-        // it's an ID, fetch the name
-        try {
-          const catRes = await fetch(`${BASE_URL}/categories/${categoryParam}`);
-          if (catRes.ok) {
-            const catData = await catRes.json();
-            newSearchParams.set("category", catData.name.toLowerCase().replace(/\s+/g, '-'));
-            needsUpdate = true;
-          }
-        } catch (err) {
-          console.error('Failed to fetch category name', err);
-        }
-      } else if (categoryParam) {
-        newSearchParams.set("category", categoryParam);
-      }
+    let needsUpdate = false;
+    const newSearchParams = new URLSearchParams();
+    if (q) newSearchParams.set("q", q);
 
-      // Check location
-      if (locationParam && /^[0-9a-fA-F]{24}$/.test(locationParam)) {
-        // it's an ID, fetch the name
-        try {
-          const locRes = await fetch(`${BASE_URL}/locations/${locationParam}`);
-          if (locRes.ok) {
-            const locData = await locRes.json();
-            newSearchParams.set("location", locData.name.toLowerCase().replace(/\s+/g, '-'));
-            needsUpdate = true;
-          }
-        } catch (err) {
-          console.error('Failed to fetch location name', err);
-        }
-      } else if (locationParam) {
-        newSearchParams.set("location", locationParam);
-      }
+    const firstResult = results[0];
 
-      if (needsUpdate) {
-        navigate(`/search?${newSearchParams.toString()}`, { replace: true });
+    if (categoryParam && /^[0-9a-fA-F]{24}$/.test(categoryParam)) {
+      const slug = firstResult.category?.slug;
+      if (slug) {
+        newSearchParams.set("category", slug);
+        needsUpdate = true;
       }
+    } else if (categoryParam) {
+      newSearchParams.set("category", categoryParam);
     }
-    updateUrlIfNeeded();
-  }, [categoryParam, locationParam, q, navigate]);
 
+    if (locationParam && /^[0-9a-fA-F]{24}$/.test(locationParam)) {
+      const slug = firstResult.location?.slug;
+      if (slug) {
+        newSearchParams.set("location", slug);
+        needsUpdate = true;
+      }
+    } else if (locationParam) {
+      newSearchParams.set("location", locationParam);
+    }
+
+    if (needsUpdate) {
+      navigate(`/search?${newSearchParams.toString()}`, { replace: true });
+    }
+  }, [loading, results, categoryParam, locationParam, q, navigate]);
+
+  // Fetch paginated results
   useEffect(() => {
     async function fetchResults() {
       setLoading(true);
       try {
-        // resolve category param (could be ID or slug)
+        // Resolve category slug → ID
         let categoryId = categoryParam;
         if (categoryParam && !/^[0-9a-fA-F]{24}$/.test(categoryParam)) {
-          // assume it's a slug; fetch category by slug first
           try {
             const catRes = await fetch(`${BASE_URL}/categories/slug/${encodeURIComponent(categoryParam)}`);
             if (catRes.ok) {
               const catData = await catRes.json();
               categoryId = catData._id;
             }
-          } catch (err) {
-            console.error('Failed to resolve category slug', err);
-          }
+          } catch (err) { /* ignore */ }
         }
 
-        // resolve location param (could be ID or slug)
+        // Resolve location slug → ID
         let locationId = locationParam;
         if (locationParam && !/^[0-9a-fA-F]{24}$/.test(locationParam)) {
-          // assume it's a slug; fetch location by slug first
           try {
             const locRes = await fetch(`${BASE_URL}/locations/slug/${encodeURIComponent(locationParam)}`);
             if (locRes.ok) {
               const locData = await locRes.json();
               locationId = locData._id;
             }
-          } catch (err) {
-            console.error('Failed to resolve location slug', err);
-          }
+          } catch (err) { /* ignore */ }
         }
 
         const url = new URL(`${BASE_URL}/customers`);
         if (q) url.searchParams.append("q", q);
         if (categoryId) url.searchParams.append("category", categoryId);
         if (locationId) url.searchParams.append("location", locationId);
+        url.searchParams.append("page", page);
+        url.searchParams.append("limit", 10);
 
         const res = await fetch(url);
         const data = await res.json();
-        setResults(data);
 
-        // Fetch photos for each result
-        const photosPromises = data.map(async (r) => {
-          const base = `${BASE_URL}/customers/${r._id}/photos`;
-          const [g1, g2, g3] = await Promise.all([
-            fetch(`${base}?group=1`).then(r => (r.ok ? r.json() : [])).catch(() => []),
-            fetch(`${base}?group=2`).then(r => (r.ok ? r.json() : [])).catch(() => []),
-            fetch(`${base}?group=3`).then(r => (r.ok ? r.json() : [])).catch(() => [])
-          ]);
-          return { id: r._id, photos1: g1, photos2: g2, photos3: g3 };
-        });
-
-        const photosResults = await Promise.all(photosPromises);
-        const newPhotosMap = {};
-        photosResults.forEach(({ id, photos1, photos2, photos3 }) => {
-          newPhotosMap[id] = { photos1, photos2, photos3 };
-        });
-        setPhotosMap(newPhotosMap);
+        setResults(data.results || []);
+        setTotal(data.total || 0);
+        setTotalPages(data.totalPages || 1);
       } catch (err) {
         console.error(err);
+        setResults([]);
       } finally {
         setLoading(false);
       }
     }
     fetchResults();
-  }, [q, categoryParam, locationParam]);
+  }, [q, categoryParam, locationParam, page]);
+
+  // Scroll to top on page change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setPage(newPage);
+    }
+  };
+
+  // Generate page numbers for pagination
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxVisible = 5;
+    let start = Math.max(1, page - Math.floor(maxVisible / 2));
+    let end = Math.min(totalPages, start + maxVisible - 1);
+    if (end - start + 1 < maxVisible) {
+      start = Math.max(1, end - maxVisible + 1);
+    }
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  };
 
   return (
-    <div className="search-results-container">
+    <div className="sr-page">
+      <Helmet>
+        <title>Search Results | OneMind Market</title>
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
 
-      <div className="search-header">
-        <h2>Results</h2>
+      {/* Search Bar Display */}
+      <div className="sr-search-bar">
+        <FiSearch className="sr-search-icon" size={18} />
+        <span className="sr-search-text">{searchDisplayText}</span>
       </div>
 
+      {/* Content */}
       {loading ? (
-        <p className="loading-text">Loading...</p>
-      ) : (
-        <div className="results-list">
-          {results.length === 0 ? (
-            <p className="no-results">No results found.</p>
-          ) : (
-            results.map((r) => {
-              const photos = photosMap[r._id] || { photos1: [], photos2: [], photos3: [] };
-              return (
-                <div key={r._id} className="shop-details-container" onClick={() => navigate(`/shop/${r.slug}`)} style={{ cursor: 'pointer' }}>
-
-                  <div className="shop-header">
-                    <img src={`${UPLOADS_URL}/${r.shopPhoto}`} alt="shop" className="shop-main-image" />
-
-                    <div className="shop-info">
-                      <h1 className="shop_name">{r.shopName}</h1>
-                      <div className="tags">
-                        <span>{r.category?.name}</span>
-                        <span>{r.location?.name}</span>
-                      </div>
-
-                      <div className="shop-short-details">
-                        <p><strong>Phone:</strong> {r.shopPhone}</p>
-                        <p><strong>Email:</strong> {r.email}</p>
-                        <p><strong>Address:</strong> {r.address}</p>
-                        <p>
-                          <strong>Website:</strong>{' '}
-                          <a
-                            href={r.website?.startsWith('http') ? r.website : `https://${r.website}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            {r.website}
-                          </a>
-                        </p>
-                        <button
-                          className="enquiry-btn"
-                          
-                        >
-                          Send Enquiry
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {r.shopDescription && (
-                    <div className="shop-description-section">
-                      <h3>Business Description</h3>
-                      <p className="business-description">{r.shopDescription}</p>
-                    </div>
-                  )}
-
-                  {r.shopArticle && (
-                    <div className="shop-article-section">
-                      <h3>Business Article</h3>
-                      <p className="business-article">{r.shopArticle}</p>
-                    </div>
-                  )}
-
-                  <ThreeSliders photos1={photos.photos1} photos2={photos.photos2} photos3={photos.photos3} />
-
-                  <div className="details-section">
-                    <h2>Owner Details</h2>
-                    <OwnerDetailsToggle shop={r} />
-                  </div>
-
-                </div>
-              );
-            })
-          )}
+        <div className="sr-loading">
+          <div className="sr-spinner" />
+          <p>Searching...</p>
         </div>
+      ) : results.length === 0 ? (
+        /* Empty State */
+        <div className="sr-empty">
+          <div className="sr-empty-icon">
+            <FiSearch size={32} />
+            <span className="sr-empty-x">&times;</span>
+          </div>
+          <h2>No results found</h2>
+          <p>
+            We couldn't find any items matching your current search.
+            Try adjusting your filters or search terms.
+          </p>
+          <button className="sr-back-btn" onClick={() => navigate("/")}>
+            Back to Home
+          </button>
+        </div>
+      ) : (
+        <>
+          {/* Results List */}
+          <div className="sr-results">
+            {results.map((r) => (
+              <div key={r._id} className="sr-card">
+                <div className="sr-card-image">
+                  {r.shopPhoto ? (
+                    <img
+                      src={`${UPLOADS_URL}/${r.shopPhoto}`}
+                      alt={r.shopName}
+                    />
+                  ) : (
+                    <div className="sr-card-no-image">No Image</div>
+                  )}
+                </div>
+                <div className="sr-card-info">
+                  {r.category?.name && (
+                    <span className="sr-badge">{r.category.name}</span>
+                  )}
+                  <h3 className="sr-card-name">{r.shopName}</h3>
+                  {r.shopDescription && (
+                    <p className="sr-card-desc">
+                      {r.shopDescription.length > 120
+                        ? r.shopDescription.slice(0, 120) + "..."
+                        : r.shopDescription}
+                    </p>
+                  )}
+                </div>
+                <div className="sr-card-action">
+                  <button
+                    className="sr-view-btn"
+                    onClick={() =>
+                      window.open(
+                        `/${r.location?.slug || "unknown"}/${r.category?.slug || "uncategorized"}/${r.slug}`,
+                        "_blank"
+                      )
+                    }
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="sr-pagination">
+              <button
+                className="sr-page-btn sr-page-arrow"
+                disabled={page === 1}
+                onClick={() => handlePageChange(page - 1)}
+              >
+                &lt;
+              </button>
+              {getPageNumbers().map((p) => (
+                <button
+                  key={p}
+                  className={`sr-page-btn ${p === page ? "sr-page-active" : ""}`}
+                  onClick={() => handlePageChange(p)}
+                >
+                  {p}
+                </button>
+              ))}
+              <button
+                className="sr-page-btn sr-page-arrow"
+                disabled={page === totalPages}
+                onClick={() => handlePageChange(page + 1)}
+              >
+                &gt;
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
 };
-
-function Slider({ photos, label }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (!photos || photos.length === 0) return;
-    const interval = setInterval(() => {
-      setCurrentIndex((i) => (i === photos.length - 1 ? 0 : i + 1));
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [photos.length]);
-
-  if (!photos || photos.length === 0) {
-    return (
-      <div className="slider-group empty">
-        <div className="slider-placeholder">No images</div>
-      </div>
-    );
-  }
-
-  const goPrev = () => setCurrentIndex((i) => (i === 0 ? photos.length - 1 : i - 1));
-  const goNext = () => setCurrentIndex((i) => (i === photos.length - 1 ? 0 : i + 1));
-
-  return (
-    <div className="slider-group">
-      <div className="slider-single">
-        <img
-          src={`${UPLOADS_URL}/${photos[currentIndex]}`}
-          alt={`shop-photo-${currentIndex}`}
-          className="slider-image-cover"
-        />
-      </div>
-    </div>
-  );
-}
-
-function ThreeSliders({ photos1, photos2, photos3 }) {
-  return (
-    <div className="image-slider-section">
-      <h3>Business Gallery</h3>
-      <div className="three-sliders">
-        <Slider photos={photos1} label="Gallery A" />
-        <Slider photos={photos2} label="Gallery B" />
-        <Slider photos={photos3} label="Gallery C" />
-      </div>
-    </div>
-  );
-}
-
-function OwnerDetailsToggle({ shop }) {
-  const [visible, setVisible] = useState(false);
-  const containerRef = useRef(null);
-  const contentRef = useRef(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const content = contentRef.current;
-    if (!container || !content) return;
-    if (visible) {
-      container.style.maxHeight = content.scrollHeight + 'px';
-      requestAnimationFrame(() => content.classList.add('show'));
-    } else {
-      content.classList.remove('show');
-      setTimeout(() => {
-        if (container) container.style.maxHeight = '0px';
-      }, 220);
-    }
-  }, [visible]);
-
-  return (
-    <div className="owner-details-section">
-      <button className="view-owner-btn" onClick={() => setVisible(v => !v)} aria-expanded={visible}>
-        {visible ? 'Hide Owner Details' : 'View Owner Details'}
-      </button>
-
-      <div className="owner-container" ref={containerRef} style={{ maxHeight: 0 }}>
-        <div className="owner-card" ref={contentRef}>
-          {shop.ownerPhoto && (
-            <img src={`${UPLOADS_URL}/${shop.ownerPhoto}`} alt="owner" className="owner-image" />
-          )}
-          <div>
-            <p><strong>Owner Name:</strong> {shop.ownerName}</p>
-            <p><strong>Owner Phone:</strong> {shop.ownerPhone}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default SearchResults;

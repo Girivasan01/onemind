@@ -10,7 +10,7 @@ const AdminLogin = () => {
   const [error, setError] = useState(null);
 
   if (auth.isAuthenticated()) {
-    return <Navigate to="/admin/add-customer" replace />;
+    return <Navigate to="/admin" replace />;
   }
 
   const submit = async (e) => {
@@ -18,7 +18,7 @@ const AdminLogin = () => {
     setError(null);
     try {
       await auth.login(username, password);
-      navigate("/admin/add-customer");
+      navigate("/admin");
     } catch (err) {
       setError(err.message || "Login failed");
     }

@@ -2,6 +2,8 @@
 .admin-container {
   display: flex;
   min-height: 100vh;
+  background: #f5f5f5;
+  color: #1e1e2f;
 }
 
 /* SIDEBAR */
@@ -35,6 +37,8 @@
 .admin-main {
   flex: 1;
   padding: 30px;
+  background: #f5f5f5;
+  color: #1e1e2f;
 }
 
 /* TITLE */
@@ -43,9 +47,17 @@
   margin-bottom: 25px;
 }
 
+/* LOGIN PAGE */
+.admin-login-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  color: #1e1e2f;
+}
+
 /* FORM CARD */
 .admin-form-card {
   background: white;
+  color: #1e1e2f;
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -108,6 +120,7 @@
 /* TABLE */
 .admin-table-card {
   background: #fff;
+  color: #1e1e2f;
   padding: 25px;
   border-radius: 10px;
   margin-top: 20px;

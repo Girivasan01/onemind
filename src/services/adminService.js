@@ -119,3 +119,76 @@ export const deleteCustomer = async (id) => {
     });
     return handleResponse(res);
 };
+
+// --- Articles ---
+export const getArticles = async () => {
+    const res = await fetch(`${BASE_URL}/articles`, { headers: authHeaders() });
+    return handleResponse(res);
+};
+
+export const createArticle = async (formData) => {
+    const res = await fetch(`${BASE_URL}/articles`, {
+        method: "POST",
+        body: formData,
+        headers: authHeaders(),
+    });
+    return handleResponse(res);
+};
+
+export const updateArticle = async (id, formData) => {
+    const res = await fetch(`${BASE_URL}/articles/${id}`, {
+        method: "PUT",
+        body: formData,
+        headers: authHeaders(),
+    });
+    return handleResponse(res);
+};
+
+export const deleteArticle = async (id) => {
+    const res = await fetch(`${BASE_URL}/articles/${id}`, {
+        method: "DELETE",
+        headers: authHeaders(),
+    });
+    return handleResponse(res);
+};
+
+// --- Gallery ---
+export const getGalleryItems = async () => {
+    const res = await fetch(`${BASE_URL}/gallery`, { headers: authHeaders() });
+    return handleResponse(res);
+};
+
+export const createGalleryItem = async (formData) => {
+    const res = await fetch(`${BASE_URL}/gallery`, {
+        method: "POST",
+        body: formData,
+        headers: authHeaders(),
+    });
+    return handleResponse(res);
+};
+
+export const updateGalleryItem = async (id, formData) => {
+    const res = await fetch(`${BASE_URL}/gallery/${id}`, {
+        method: "PUT",
+        body: formData,
+        headers: authHeaders(),
+    });
+    return handleResponse(res);
+};
+
+export const deleteGalleryItem = async (id) => {
+    const res = await fetch(`${BASE_URL}/gallery/${id}`, {
+        method: "DELETE",
+        headers: authHeaders(),
+    });
+    return handleResponse(res);
+};
+
+export const reorderGalleryItems = async (items) => {
+    const res = await fetch(`${BASE_URL}/gallery/reorder`, {
+        method: "PATCH",
+        headers: authHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify({ items }),
+    });
+    return handleResponse(res);
+};
