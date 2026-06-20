@@ -41,7 +41,8 @@ const SendEnquiry = () => {
         setMessage("Enquiry sent successfully");
 
         // Open WhatsApp with the shop's phone number
-        const rawNumber = shop?.shopPhone?.replace(/\D/g, "");
+        const digits = shop?.shopPhone?.replace(/\D/g, "");
+        const rawNumber = digits?.length === 10 ? `91${digits}` : digits;
         if (rawNumber) {
           const text = encodeURIComponent(
             `Hi, I'm ${formData.name}.\n\n${formData.enquiry}\n\nMy phone: ${formData.phone}${formData.referredBy ? `\nReferred by: ${formData.referredBy}` : ""}`
