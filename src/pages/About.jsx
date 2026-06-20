@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { FaWhatsapp } from "react-icons/fa";
 import "./about.css";
 
-const WHATSAPP_NUMBER = process.env.REACT_APP_WHATSAPP_NUMBER || "919000000000";
+const WHATSAPP_NUMBER = process.env.REACT_APP_WHATSAPP_NUMBER || "919677690666";
 
 const About = () => {
   const [form, setForm] = useState({
