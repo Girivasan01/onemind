@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import PublicLayout from "./components/PublicLayout";
 import Home from "./pages/Home.js";
 import About from "./pages/About";
@@ -28,6 +29,7 @@ import "./App.css";
 function App() {
   return (
     <div>
+      <ScrollToTop />
       <Routes>
         {/* Public pages with shared Header & Footer */}
         <Route element={<PublicLayout />}>
@@ -55,7 +57,7 @@ function App() {
           <Route path="customers/new" element={<CustomerForm />} />
           <Route path="customers/edit/:id" element={<CustomerForm />} />
           <Route path="view-join-requests" element={<ViewJoinRequests />} />
-          <Route path="AdminEnquiries" element={< AdminEnquiries />} />
+          <Route path="AdminEnquiries" element={<AdminEnquiries />} />
           <Route path="articles" element={<ManageArticles />} />
           <Route path="articles/new" element={<ArticleForm />} />
           <Route path="articles/edit/:id" element={<ArticleForm />} />
